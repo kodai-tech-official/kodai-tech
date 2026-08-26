@@ -86,47 +86,26 @@ kodaitech/
 
 ## 🚀 Getting Started & Local Deployment
 
-No build steps, no package managers, and no server configuration required.
+No build steps, no package managers, and no server configuration required. 
 
-1. **Clone the repository:**
-**Clone the repository:**
-`git clone https://github.com/YOUR_USERNAME/kodaitech.git`
-`cd kodaitech`
+To run or modify the workspace locally, simply clone the repository and open `index.html` in any modern browser:
 
-2. **Launch the workspace:**
-Open `index.html` in any modern web browser, or serve it via a local static server:
-`python3 -m http.server 8080`
+```bash
+git clone https://github.com/YOUR_USERNAME/kodaitech.git
+cd kodaitech
+```
+
+You can open `index.html` directly or run a local static server:
+
+```bash
+python3 -m http.server 8080
+```
 
 ---
 
 ## 📄 License
 
 Distributed under the **MIT License**. See `LICENSE` for more information.
-
-
-
-
-
-
-
-
-
-
-
----
-
-## 🚀 Local Deployment & Development
-
-To run or modify the workspace locally, simply clone the repository and open `index.html` in any modern browser:
-
-```bash
-git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
-cd YOUR_REPOSITORY
-```
-
-## 📜 License
-
-This project is open-source and available under the MIT License.
 
 ---
 *Built with passion and coffee.* ☕⚡
