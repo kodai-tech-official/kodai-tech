@@ -1,0 +1,159 @@
+body {
+    background-color: #0d1117;
+    color: #c9d1d9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    padding: 40px 20px;
+    margin: 0;
+}
+
+.container {
+    max-width: 650px;
+    margin: 0 auto;
+    background: #161b22;
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid #30363d;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+
+.logo-container {
+    margin-bottom: 15px;
+}
+
+.logo-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid #58a6ff;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(88, 166, 255, 0.3);
+}
+
+h1 {
+    color: #58a6ff;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    font-style: italic;
+    color: #8b949e;
+    margin-bottom: 25px;
+}
+
+.welcome-text {
+    background: #21262d;
+    padding: 15px 20px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #c9d1d9;
+    margin-bottom: 25px;
+    line-height: 1.5;
+    border: 1px solid #30363d;
+    text-align: left;
+}
+
+.welcome-text strong {
+    color: #58a6ff;
+}
+
+.quote-box {
+    background: #21262d;
+    padding: 20px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    border-left: 4px solid #58a6ff;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+button {
+    background-color: #238636;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background-color: #2ea043;
+}
+
+button.secondary {
+    background-color: #30363d;
+    color: #c9d1d9;
+    border: 1px solid #484f58;
+}
+
+button.secondary:hover {
+    background-color: #388bfd;
+    color: white;
+    border-color: #388bfd;
+}
+
+.dashboard {
+    border-top: 1px solid #30363d;
+    padding-top: 25px;
+    text-align: left;
+}
+
+.dashboard h3 {
+    color: #3fb950;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.dashboard-desc {
+    font-size: 0.85rem;
+    color: #8b949e;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.status-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.status-card {
+    background: #21262d;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #30363d;
+}
+
+.status-title {
+    font-size: 0.85rem;
+    color: #8b949e;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.status-value {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #58a6ff;
+}
+
+.status-value.green {
+    color: #3fb950;
+}
