@@ -10,34 +10,34 @@
             color: #c9d1d9;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
-            padding: 50px 20px;
+            padding: 40px 20px;
         }
         .container {
-            max-width: 600px;
+            max-width: 650px;
             margin: 0 auto;
             background: #161b22;
-            padding: 40px;
+            padding: 30px;
             border-radius: 12px;
             border: 1px solid #30363d;
             box-shadow: 0 8px 24px rgba(0,0,0,0.5);
         }
         h1 {
             color: #58a6ff;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
         .subtitle {
             font-style: italic;
             color: #8b949e;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
         .quote-box {
             background: #21262d;
             padding: 20px;
             border-radius: 8px;
-            font-size: 1.2rem;
-            margin-bottom: 30px;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
             border-left: 4px solid #58a6ff;
-            min-height: 60px;
+            min-height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -46,15 +46,58 @@
             background-color: #238636;
             color: white;
             border: none;
-            padding: 12px 24px;
-            font-size: 1rem;
+            padding: 10px 20px;
+            font-size: 0.95rem;
             font-weight: bold;
             border-radius: 6px;
             cursor: pointer;
             transition: background 0.2s;
+            margin-bottom: 30px;
         }
         button:hover {
             background-color: #2ea043;
+        }
+        /* Stili per la Dashboard Quantum Status */
+        .dashboard {
+            border-top: 1px solid #30363d;
+            padding-top: 25px;
+            text-align: left;
+        }
+        .dashboard h3 {
+            color: #3fb950;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .status-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .status-card {
+            background: #21262d;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #30363d;
+        }
+        .status-title {
+            font-size: 0.85rem;
+            color: #8b949e;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        .status-value {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #58a6ff;
+        }
+        .status-value.green {
+            color: #3fb950;
+        }
+        .status-value.orange {
+            color: #d29922;
         }
     </style>
 </head>
@@ -69,6 +112,29 @@
         </div>
         
         <button onclick="generateQuote()">Generate Quantum Quote 🚀</button>
+
+        <!-- SEZIONE DASHBOARD QUANTUM STATUS -->
+        <div class="dashboard">
+            <h3>⚡ Quantum Status Dashboard</h3>
+            <div class="status-grid">
+                <div class="status-card">
+                    <div class="status-title">Red Panda Mascot</div>
+                    <div class="status-value green">Active & Caffeinated 🐼</div>
+                </div>
+                <div class="status-card">
+                    <div class="status-title">Espresso Core Level</div>
+                    <div class="status-value orange" id="coffeeLevel">98.4% ☕</div>
+                </div>
+                <div class="status-card">
+                    <div class="status-title">Quantum Flux</div>
+                    <div class="status-value" id="fluxState">Stable (Superposition)</div>
+                </div>
+                <div class="status-card">
+                    <div class="status-title">Active Semicolons</div>
+                    <div class="status-value green">All Found ⚡</div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -88,6 +154,10 @@
         function generateQuote() {
             const randomIndex = Math.floor(Math.random() * quotes.length);
             document.getElementById('quoteDisplay').innerText = quotes[randomIndex];
+            
+            // Effetto visivo simpatico: ogni volta che generi una frase, il livello di caffè oscilla quantisticamente!
+            const randomCoffee = (90 + Math.random() * 9.9).toFixed(1);
+            document.getElementById('coffeeLevel').innerText = randomCoffee + "% ☕";
         }
     </script>
 
