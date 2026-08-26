@@ -64,6 +64,24 @@ body {
     color: var(--text-muted);
 }
 
+/* Workspace Legend Styling */
+.workspace-legend {
+    background: #0d0d0d;
+    border-bottom: 1px solid var(--border-line);
+    padding: 14px 25px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    line-height: 1.4;
+}
+
+.legend-line .highlight {
+    color: var(--accent);
+    font-weight: bold;
+}
+
 .tool-layout {
     display: grid;
     grid-template-columns: 240px 1fr;
@@ -153,7 +171,6 @@ textarea:focus, input[type="text"]:focus {
     border-color: var(--accent);
 }
 
-/* Advanced Layout Utilities */
 .control-grid-vertical {
     display: flex;
     flex-direction: column;

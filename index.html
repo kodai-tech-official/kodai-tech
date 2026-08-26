@@ -14,10 +14,16 @@
             <div class="brand-group">
                 <span class="prompt-symbol">&gt;</span>
                 <h1>KODAI_TECH</h1>
-                <span class="version-tag">v0.4.0-pro</span>
+                <span class="version-tag">v0.4.1-pro</span>
             </div>
             <p class="workspace-subtitle">Advanced client-side engineering utility environment.</p>
         </header>
+
+        <!-- Workspace Legend / Context -->
+        <section class="workspace-legend">
+            <div class="legend-line"><span class="highlight">SYSTEM_OVERVIEW:</span> Independent, zero-dependency developer tools executing entirely within your browser runtime. No payloads are stored or transmitted.</div>
+            <div class="legend-line"><span class="highlight">NAVIGATION:</span> Select an environment module from the left control matrix to load the corresponding utility interface.</div>
+        </section>
 
         <!-- Main Interactive Section -->
         <div class="tool-layout">
@@ -76,7 +82,7 @@
                     </div>
                     <div class="input-split-row">
                         <input type="text" id="regexPattern" placeholder="Pattern (e.g. \b[A-Za-z0-9._%+-]+@...)">
-                        <input type="text" id="regexFlags" placeholder="Flags (e.g. gi)" value="g">
+                        <input type="text" id="regexFlags" placeholder="Flags (e.g. g, i, m)">
                     </div>
                     <textarea id="regexString" placeholder="Target text payload to search..."></textarea>
                     <button class="action-trigger" onclick="runAdvancedRegex()">Execute Matcher</button>
@@ -111,7 +117,7 @@
         </div>
     </div>
 
-    <!-- Advanced Script Logic -->
+    <!-- Script Logic -->
     <script>
         function switchTool(toolId) {
             document.querySelectorAll('.tool-view').forEach(el => el.classList.remove('active'));
@@ -120,7 +126,6 @@
             event.currentTarget.classList.add('active');
         }
 
-        // 1. Advanced Key Generator Logic
         function updatePassLabel() {
             document.getElementById('passLenVal').innerText = document.getElementById('passLength').value;
         }
@@ -128,7 +133,6 @@
         function generateAdvancedKey() {
             const length = parseInt(document.getElementById('passLength').value);
             let chars = "";
-            
             const upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             const lower = "abcdefghijklmnopqrstuvwxyz";
             const nums = "0123456789";
@@ -141,7 +145,7 @@
             if (document.getElementById('optSym').checked) chars += syms;
 
             if (document.getElementById('optAmbiguous').checked) {
-                chars = chars.split('').c.filter(c => !ambiguous.includes(c)).join('');
+                chars = chars.split('').filter(c => !ambiguous.includes(c)).join('');
             }
 
             const output = document.getElementById('passOutput');
@@ -162,7 +166,6 @@
             output.className = "console-output success";
         }
 
-        // 2. JWT Inspector Logic
         function inspectJwt() {
             const token = document.getElementById('jwtInput').value.trim();
             const output = document.getElementById('jwtOutput');
@@ -193,7 +196,6 @@
             }
         }
 
-        // 3. Regex Workbench Logic
         function runAdvancedRegex() {
             const pattern = document.getElementById('regexPattern').value;
             const flags = document.getElementById('regexFlags').value;
@@ -222,7 +224,6 @@
             }
         }
 
-        // 4. CSS Clamp Generator Logic
         function generateClamp() {
             const min = document.getElementById('clampMin').value;
             const ideal = document.getElementById('clampIdeal').value;
