@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KODAI TECH - Quantum Coffee & Code</title>
+    <style>
+        body {
+            background-color: #0d1117;
+            color: #c9d1d9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            padding: 50px 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #161b22;
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid #30363d;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+        }
+        h1 {
+            color: #58a6ff;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            font-style: italic;
+            color: #8b949e;
+            margin-bottom: 30px;
+        }
+        .quote-box {
+            background: #21262d;
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            border-left: 4px solid #58a6ff;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        button {
+            background-color: #238636;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background-color: #2ea043;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>KODAI TECH ☕🐼</h1>
+        <p class="subtitle">Quantum Coffee & Code Generator</p>
+        
+        <div class="quote-box" id="quoteDisplay">
+            Click the button below to generate a quantum thought...
+        </div>
+        
+        <button onclick="generateQuote()">Generate Quantum Quote 🚀</button>
+    </div>
+
+    <script>
+        const quotes = [
+            "☕ Code compiles better when the coffee is hot and quantum-entangled.",
+            "🚀 Debugging is like crossing parallel universes until you find the missing semicolon.",
+            "🐼 A true developer turns coffee into clean architecture.",
+            "⚡ Quantum superposition: your code works, but you have no idea why until you look at it.",
+            "☕ Too much coffee? No, that's just high-frequency quantum processing.",
+            "🔮 Predicting software delivery dates is harder than predicting quantum fluctuations.",
+            "💻 Infinite loops are just time loops happening inside your terminal.",
+            "☕ Espresso: the ultimate asynchronous driver for human productivity.",
+            "🌌 Merging branches without conflicts requires an alignment of planetary dimensions.",
+            "🐼 Red panda energy: 90% cuteness, 10% pure algorithmic genius."
+        ];
+
+        function generateQuote() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            document.getElementById('quoteDisplay').innerText = quotes[randomIndex];
+        }
+    </script>
+
+</body>
+</html>
