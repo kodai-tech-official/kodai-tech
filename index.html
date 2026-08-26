@@ -30,6 +30,21 @@
             color: #8b949e;
             margin-bottom: 25px;
         }
+        /* Nuovo blocco di benvenuto/spiegazione */
+        .welcome-text {
+            background: #21262d;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: #c9d1d9;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            border: 1px solid #30363d;
+            text-align: left;
+        }
+        .welcome-text strong {
+            color: #58a6ff;
+        }
         .quote-box {
             background: #21262d;
             padding: 20px;
@@ -57,7 +72,6 @@
         button:hover {
             background-color: #2ea043;
         }
-        /* Stili per la Dashboard Quantum Status */
         .dashboard {
             border-top: 1px solid #30363d;
             padding-top: 25px;
@@ -66,10 +80,16 @@
         .dashboard h3 {
             color: #3fb950;
             font-size: 1.1rem;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             text-align: center;
             text-transform: uppercase;
             letter-spacing: 1px;
+        }
+        .dashboard-desc {
+            font-size: 0.85rem;
+            color: #8b949e;
+            text-align: center;
+            margin-bottom: 15px;
         }
         .status-grid {
             display: grid;
@@ -107,6 +127,11 @@
         <h1>KODAI TECH ☕🐼</h1>
         <p class="subtitle">Quantum Coffee & Code Generator</p>
         
+        <!-- Spiegazione iniziale per i nuovi visitatori -->
+        <div class="welcome-text">
+            👋 <strong>Benvenuto nel quartier generale di KODAI TECH!</strong> Questo spazio unisce l'ingegneria del software, la fisica quantistica e la caffeina. Qui sotto puoi generare pensieri nerd casuali dal nostro generatore e monitorare in tempo reale i parametri vitali del nostro sistema.
+        </div>
+
         <div class="quote-box" id="quoteDisplay">
             Click the button below to generate a quantum thought...
         </div>
@@ -116,6 +141,8 @@
         <!-- SEZIONE DASHBOARD QUANTUM STATUS -->
         <div class="dashboard">
             <h3>⚡ Quantum Status Dashboard</h3>
+            <p class="dashboard-desc">Pannello di controllo in tempo reale delle attività di sviluppo e dei livelli di energia del team.</p>
+            
             <div class="status-grid">
                 <div class="status-card">
                     <div class="status-title">Red Panda Mascot</div>
@@ -155,7 +182,6 @@
             const randomIndex = Math.floor(Math.random() * quotes.length);
             document.getElementById('quoteDisplay').innerText = quotes[randomIndex];
             
-            // Effetto visivo simpatico: ogni volta che generi una frase, il livello di caffè oscilla quantisticamente!
             const randomCoffee = (90 + Math.random() * 9.9).toFixed(1);
             document.getElementById('coffeeLevel').innerText = randomCoffee + "% ☕";
         }
