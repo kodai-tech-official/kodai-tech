@@ -42,7 +42,8 @@ The workspace features a collection of high-performance developer tools designed
 
 To run or modify the workspace locally, simply clone the repository and open `index.html` in any modern browser:
 
-git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
+```bash
+git clone [https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git](https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git)
 cd YOUR_REPOSITORY
 
 ## 📜 License
