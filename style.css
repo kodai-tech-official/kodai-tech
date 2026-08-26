@@ -2,11 +2,9 @@
     --bg-core: #0a0a0a;
     --panel-bg: #111111;
     --border-line: #222222;
-    --border-active: #ffffff;
     --text-main: #e0e0e0;
     --text-muted: #666666;
-    --accent: #ff4d00; /* Un tocco industriale distintivo anziché il solito blu */
-    --accent-glow: rgba(255, 77, 0, 0.15);
+    --accent: #ff4d00;
     --success: #00ff66;
     --error: #ff3333;
 }
@@ -14,7 +12,7 @@
 body {
     background-color: var(--bg-core);
     color: var(--text-main);
-    font-family: 'Courier New', Courier, monospace; /* Stile terminale tecnico */
+    font-family: 'Courier New', Courier, monospace;
     margin: 0;
     padding: 30px 20px;
     display: flex;
@@ -22,13 +20,12 @@ body {
 }
 
 .workspace {
-    max-width: 960px;
+    max-width: 980px;
     width: 100%;
     border: 1px solid var(--border-line);
     background: var(--panel-bg);
 }
 
-/* Header */
 .workspace-header {
     padding: 20px 25px;
     border-bottom: 1px solid var(--border-line);
@@ -67,7 +64,6 @@ body {
     color: var(--text-muted);
 }
 
-/* Layout Split: Nav + Console */
 .tool-layout {
     display: grid;
     grid-template-columns: 240px 1fr;
@@ -79,7 +75,6 @@ body {
     }
 }
 
-/* Sidebar Nav */
 .tool-nav {
     border-right: 1px solid var(--border-line);
     display: flex;
@@ -110,10 +105,9 @@ body {
     border-left: 3px solid var(--accent);
 }
 
-/* Console Panel */
 .console-panel {
     padding: 25px;
-    min-height: 320px;
+    min-height: 360px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -140,7 +134,6 @@ body {
     color: var(--text-muted);
 }
 
-/* Inputs & Elements */
 textarea, input[type="text"] {
     background: var(--bg-core);
     border: 1px solid var(--border-line);
@@ -152,7 +145,7 @@ textarea, input[type="text"] {
 }
 
 textarea {
-    height: 80px;
+    height: 90px;
 }
 
 textarea:focus, input[type="text"]:focus {
@@ -160,13 +153,17 @@ textarea:focus, input[type="text"]:focus {
     border-color: var(--accent);
 }
 
-.input-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+/* Advanced Layout Utilities */
+.control-grid-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--bg-core);
+    border: 1px solid var(--border-line);
+    padding: 15px;
 }
 
-.pass-row {
+.input-group-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -174,15 +171,54 @@ textarea:focus, input[type="text"]:focus {
     color: var(--text-muted);
 }
 
-.pass-row input[type="range"] {
+.input-group-row input[type="range"] {
     accent-color: var(--accent);
+    width: 60%;
+}
+
+.checkbox-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 8px;
+    font-size: 0.8rem;
+    color: var(--text-main);
+}
+
+.checkbox-row label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.checkbox-row input[type="checkbox"] {
+    accent-color: var(--accent);
+}
+
+.input-split-row {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 10px;
+}
+
+.input-triple-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+.input-triple-row label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 4px;
 }
 
 .action-trigger {
     background: var(--text-main);
     color: var(--bg-core);
     border: none;
-    padding: 10px 16px;
+    padding: 11px 16px;
     font-family: inherit;
     font-weight: bold;
     font-size: 0.8rem;
@@ -197,23 +233,6 @@ textarea:focus, input[type="text"]:focus {
     color: #ffffff;
 }
 
-.action-trigger.alt {
-    background: #222;
-    color: var(--text-main);
-    border: 1px solid var(--border-line);
-}
-
-.action-trigger.alt:hover {
-    border-color: var(--text-main);
-}
-
-.btn-split {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-}
-
-/* Console Output Box */
 .console-output {
     background: var(--bg-core);
     border: 1px solid var(--border-line);
@@ -222,6 +241,13 @@ textarea:focus, input[type="text"]:focus {
     color: var(--text-muted);
     min-height: 24px;
     word-break: break-all;
+    white-space: pre-wrap;
+}
+
+.console-output.code-block {
+    font-family: 'Courier New', Courier, monospace;
+    max-height: 180px;
+    overflow-y: auto;
 }
 
 .console-output.success {
