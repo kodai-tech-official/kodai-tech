@@ -6,57 +6,107 @@
     <title>JSON-to-TS Converter — Kodai Tech</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
-        .output-wrapper { position: relative; }
+        .tool-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .panel {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border-terminal);
+            border-top: 2px solid var(--accent-primary);
+            padding: 2rem;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-bright);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        textarea {
+            width: 100%;
+            height: 140px;
+            padding: 1rem;
+            background-color: var(--bg-terminal);
+            border: 1px solid var(--border-terminal);
+            border-radius: 2px;
+            color: var(--text-bright);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            resize: vertical;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+        }
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
         .btn-copy {
-            position: absolute;
-            top: 32px;
-            right: 10px;
             background: var(--border-terminal);
             color: var(--text-bright);
             border: none;
-            padding: 0.3rem 0.6rem;
+            padding: 0.3rem 0.8rem;
             font-family: var(--font-mono);
             font-size: 0.75rem;
             cursor: pointer;
             text-transform: uppercase;
         }
-        .btn-copy:hover { background: var(--accent-primary); color: var(--bg-terminal); }
+        .btn-copy:hover {
+            background: var(--accent-primary);
+            color: var(--bg-terminal);
+        }
     </style>
 </head>
 <body>
 
-    <header class="app-header">
-        <div class="header-left">
-            <img src="assets/img/logo.jpg" alt="Logo" class="logo">
-            <div class="header-title">
-                <h1>JSON-to-TS Converter</h1>
-                <p>Convert raw JSON payloads into TypeScript interfaces</p>
+    <div class="tool-container">
+        <header class="app-header" style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-terminal); padding-bottom: 1rem; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <h1 style="font-size: 1.2rem; color: var(--text-bright); text-transform: uppercase;">JSON-to-TS Converter</h1>
+                <p style="font-size: 0.8rem; color: var(--text-main);">Convert raw JSON payloads into TypeScript interfaces</p>
             </div>
-        </div>
-        <a href="index.html" class="back-link">&larr; Launchpad</a>
-    </header>
+            <a href="index.html" class="back-link">&larr; Launchpad</a>
+        </header>
 
-    <main class="workspace">
-        <div class="panel">
-            <div class="form-group">
-                <label for="input-json">Raw JSON Payload Stream</label>
-                <textarea id="input-json" style="height: 150px;" placeholder='{ "id": 1, "name": "Kodai Tech", "active": true }'></textarea>
+        <main>
+            <div class="panel">
+                <div class="form-group">
+                    <label for="input-json">Raw JSON Payload Stream</label>
+                    <textarea id="input-json" placeholder='{ "id": 1, "name": "Kodai Tech", "active": true }'></textarea>
+                </div>
+                <button class="btn-primary" onclick="convertJsonToTs()">// Parse & Convert</button>
             </div>
-            <button class="btn-primary" onclick="convertJsonToTs()">// Parse & Convert</button>
-        </div>
 
-        <div class="panel output-wrapper">
-            <div class="form-group">
-                <label for="output-ts">TypeScript Interface Output</label>
-                <button class="btn-copy" onclick="copyOutput()">Copy</button>
-                <textarea id="output-ts" readonly style="height: 150px;" placeholder="TypeScript definitions..."></textarea>
+            <div class="panel">
+                <div class="form-group">
+                    <div class="output-header">
+                        <label for="output-ts" style="margin-bottom: 0;">TypeScript Interface Output</label>
+                        <button class="btn-copy" onclick="copyOutput()">Copy</button>
+                    </div>
+                    <textarea id="output-ts" readonly placeholder="TypeScript definitions..."></textarea>
+                </div>
             </div>
-        </div>
-    </main>
+        </main>
 
-    <footer>
-        Kodai Tech // Code local. Think fast.
-    </footer>
+        <footer style="margin-top: 3rem; text-align: center; font-size: 0.75rem; color: var(--text-main); text-transform: uppercase; letter-spacing: 1px;">
+            Kodai Tech // Code local. Think fast.
+        </footer>
+    </div>
 
     <script>
         function capitalize(str) { return str.charAt(0).toUpperCase() + str.slice(1); }

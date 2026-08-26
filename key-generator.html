@@ -6,9 +6,63 @@
     <title>CSPRNG Key Generator — Kodai Tech</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
+        .tool-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .panel {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border-terminal);
+            border-top: 2px solid var(--accent-primary);
+            padding: 2rem;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-bright);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        select, input[type="number"] {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--bg-terminal);
+            border: 1px solid var(--border-terminal);
+            border-radius: 2px;
+            color: var(--text-bright);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+        }
+        select:focus, input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+        }
+        textarea {
+            width: 100%;
+            height: 120px;
+            padding: 1rem;
+            background-color: var(--bg-terminal);
+            border: 1px solid var(--border-terminal);
+            border-radius: 2px;
+            color: var(--text-bright);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            resize: vertical;
+        }
         .options-row {
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem;
             flex-wrap: wrap;
             padding: 1rem 0;
             border-top: 1px solid var(--border-terminal);
@@ -24,74 +78,80 @@
             color: var(--text-main);
             text-transform: uppercase;
         }
-        .output-wrapper { position: relative; }
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
         .btn-copy {
-            position: absolute;
-            top: 32px;
-            right: 10px;
             background: var(--border-terminal);
             color: var(--text-bright);
             border: none;
-            padding: 0.3rem 0.6rem;
+            padding: 0.3rem 0.8rem;
             font-family: var(--font-mono);
             font-size: 0.75rem;
             cursor: pointer;
             text-transform: uppercase;
         }
-        .btn-copy:hover { background: var(--accent-primary); color: var(--bg-terminal); }
+        .btn-copy:hover {
+            background: var(--accent-primary);
+            color: var(--bg-terminal);
+        }
     </style>
 </head>
 <body>
 
-    <header class="app-header">
-        <div class="header-left">
-            <img src="assets/img/logo.jpg" alt="Logo" class="logo">
-            <div class="header-title">
-                <h1>CSPRNG Key Generator</h1>
-                <p>Cryptographically secure pseudo-random secret generation</p>
+    <div class="tool-container">
+        <header class="app-header" style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-terminal); padding-bottom: 1rem; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <h1 style="font-size: 1.2rem; color: var(--text-bright); text-transform: uppercase;">CSPRNG Key Generator</h1>
+                <p style="font-size: 0.8rem; color: var(--text-main);">Cryptographically secure pseudo-random secret generation</p>
             </div>
-        </div>
-        <a href="index.html" class="back-link">&larr; Launchpad</a>
-    </header>
+            <a href="index.html" class="back-link">&larr; Launchpad</a>
+        </header>
 
-    <main class="workspace">
-        <div class="panel">
-            <div class="form-group">
-                <label for="format">Generation Format</label>
-                <select id="format" onchange="toggleOptions()">
-                    <option value="hex">Hexadecimal (64-char / 256-bit default)</option>
-                    <option value="base64">Base64 URL-Safe</option>
-                    <option value="password">Custom Password / Alphanumeric Secret</option>
-                </select>
+        <main>
+            <div class="panel">
+                <div class="form-group">
+                    <label for="format">Generation Format</label>
+                    <select id="format" onchange="toggleOptions()">
+                        <option value="hex">Hexadecimal (64-char / 256-bit default)</option>
+                        <option value="base64">Base64 URL-Safe</option>
+                        <option value="password">Custom Password / Alphanumeric Secret</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="length-group">
+                    <label for="length">Byte Length / Character Length</label>
+                    <input type="number" id="length" value="32" min="8" max="256">
+                </div>
+
+                <div class="options-row" id="password-options" style="display: none;">
+                    <label class="checkbox-label"><input type="checkbox" id="inc-upper" checked> Uppercase (A-Z)</label>
+                    <label class="checkbox-label"><input type="checkbox" id="inc-lower" checked> Lowercase (a-z)</label>
+                    <label class="checkbox-label"><input type="checkbox" id="inc-num" checked> Numbers (0-9)</label>
+                    <label class="checkbox-label"><input type="checkbox" id="inc-sym" checked> Symbols (!@#$...)</label>
+                </div>
+
+                <button class="btn-primary" onclick="generateKey()">// Execute Generation</button>
             </div>
 
-            <div class="form-group" id="length-group">
-                <label for="length">Byte Length / Character Length</label>
-                <input type="number" id="length" value="32" min="8" max="256">
+            <div class="panel">
+                <div class="form-group">
+                    <div class="output-header">
+                        <label for="output" style="margin-bottom: 0;">Generated Output Buffer</label>
+                        <button class="btn-copy" onclick="copyToClipboard()">Copy</button>
+                    </div>
+                    <textarea id="output" readonly placeholder="Secure output buffer..."></textarea>
+                </div>
             </div>
+        </main>
 
-            <div class="options-row" id="password-options" style="display: none;">
-                <label class="checkbox-label"><input type="checkbox" id="inc-upper" checked> Uppercase (A-Z)</label>
-                <label class="checkbox-label"><input type="checkbox" id="inc-lower" checked> Lowercase (a-z)</label>
-                <label class="checkbox-label"><input type="checkbox" id="inc-num" checked> Numbers (0-9)</label>
-                <label class="checkbox-label"><input type="checkbox" id="inc-sym" checked> Symbols (!@#$...)</label>
-            </div>
-
-            <button class="btn-primary" onclick="generateKey()">// Execute Generation</button>
-        </div>
-
-        <div class="panel output-wrapper">
-            <div class="form-group">
-                <label for="output">Generated Output Buffer</label>
-                <button class="btn-copy" onclick="copyToClipboard()">Copy</button>
-                <textarea id="output" readonly style="height: 120px;" placeholder="Secure output buffer..."></textarea>
-            </div>
-        </div>
-    </main>
-
-    <footer>
-        Kodai Tech // Code local. Think fast.
-    </footer>
+        <footer style="margin-top: 3rem; text-align: center; font-size: 0.75rem; color: var(--text-main); text-transform: uppercase; letter-spacing: 1px;">
+            Kodai Tech // Code local. Think fast.
+        </footer>
+    </div>
 
     <script>
         function toggleOptions() {

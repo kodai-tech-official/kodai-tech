@@ -6,6 +6,50 @@
     <title>JWT Inspector — Kodai Tech</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
+        .tool-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .panel {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border-terminal);
+            border-top: 2px solid var(--accent-primary);
+            padding: 2rem;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-bright);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 1rem;
+            background-color: var(--bg-terminal);
+            border: 1px solid var(--border-terminal);
+            border-radius: 2px;
+            color: var(--text-bright);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            resize: vertical;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+        }
         .grid-outputs {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -20,8 +64,9 @@
             font-size: 0.8rem;
             color: var(--accent-success);
             overflow-x: auto;
-            max-height: 280px;
+            max-height: 240px;
             border: 1px solid var(--border-terminal);
+            margin-top: 0.5rem;
         }
         .status-badge {
             display: inline-block;
@@ -29,7 +74,6 @@
             border-radius: 2px;
             font-size: 0.75rem;
             font-weight: 600;
-            margin-bottom: 1rem;
             font-family: var(--font-mono);
             text-transform: uppercase;
         }
@@ -40,41 +84,40 @@
 </head>
 <body>
 
-    <header class="app-header">
-        <div class="header-left">
-            <img src="assets/img/logo.jpg" alt="Logo" class="logo">
-            <div class="header-title">
-                <h1>JWT Inspector</h1>
-                <p>Client-side JSON Web Token decoder & claims analyzer</p>
+    <div class="tool-container">
+        <header class="app-header" style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-terminal); padding-bottom: 1rem; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <h1 style="font-size: 1.2rem; color: var(--text-bright); text-transform: uppercase;">JWT Inspector</h1>
+                <p style="font-size: 0.8rem; color: var(--text-main);">Client-side JSON Web Token decoder & claims analyzer</p>
             </div>
-        </div>
-        <a href="index.html" class="back-link">&larr; Launchpad</a>
-    </header>
+            <a href="index.html" class="back-link">&larr; Launchpad</a>
+        </header>
 
-    <main class="workspace">
-        <div class="panel">
-            <div class="form-group">
-                <label for="jwt-input">Paste JWT Token Stream</label>
-                <textarea id="jwt-input" style="height: 100px;" placeholder="eyJhbGciOiJIUzI1NiIsIn..." oninput="inspectJWT()"></textarea>
-            </div>
-            <div id="token-status"></div>
-        </div>
-
-        <div class="grid-outputs">
+        <main>
             <div class="panel">
-                <label style="margin-bottom: 0.75rem;">Header Segment</label>
-                <pre id="jwt-header">// Header buffer empty</pre>
+                <div class="form-group">
+                    <label for="jwt-input">Paste JWT Token Stream</label>
+                    <textarea id="jwt-input" placeholder="eyJhbGciOiJIUzI1NiIsIn..." oninput="inspectJWT()"></textarea>
+                </div>
+                <div id="token-status" style="margin-top: 1rem;"></div>
             </div>
-            <div class="panel">
-                <label style="margin-bottom: 0.75rem;">Payload Claims Segment</label>
-                <pre id="jwt-payload">// Payload buffer empty</pre>
-            </div>
-        </div>
-    </main>
 
-    <footer>
-        Kodai Tech // Code local. Think fast.
-    </footer>
+            <div class="grid-outputs">
+                <div class="panel" style="margin-bottom: 0;">
+                    <label>Header Segment</label>
+                    <pre id="jwt-header">// Header buffer empty</pre>
+                </div>
+                <div class="panel" style="margin-bottom: 0;">
+                    <label>Payload Claims Segment</label>
+                    <pre id="jwt-payload">// Payload buffer empty</pre>
+                </div>
+            </div>
+        </main>
+
+        <footer style="margin-top: 3rem; text-align: center; font-size: 0.75rem; color: var(--text-main); text-transform: uppercase; letter-spacing: 1px;">
+            Kodai Tech // Code local. Think fast.
+        </footer>
+    </div>
 
     <script>
         function base64UrlDecode(str) {
