@@ -3,80 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KODAI TECH - Developer Utilities</title>
+    <title>KODAI TECH - Developer Utilities Hub</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="container">
-        <!-- Red Panda Mascot Official Logo -->
-        <div class="logo-container">
-            <img src="assets/logo.jpg" alt="KODAI TECH Red Panda Mascot" class="logo-img" onerror="this.src='https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=150&auto=format&fit=crop&q=80'">
-        </div>
-
-        <h1>KODAI TECH 🐼</h1>
-        <p class="subtitle">Developer Utilities Workspace</p>
+    <main class="container">
+        <!-- Header & Brand -->
+        <header class="header-card">
+            <div class="logo-container">
+                <img src="assets/logo.jpg" alt="KODAI TECH Red Panda Mascot" class="logo-img" onerror="this.src='https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=150&auto=format&fit=crop&q=80'">
+            </div>
+            <div class="brand-info">
+                <h1>KODAI TECH 🐼</h1>
+                <p class="subtitle">Open Developer Utilities & Community Workspace</p>
+            </div>
+        </header>
         
-        <div class="welcome-text">
-            👋 <strong>Welcome to KODAI TECH!</strong> An independent hub of open-source resources, utilities, and tools designed to streamline your daily development workflow.
-        </div>
+        <!-- Introduction Section -->
+        <section class="welcome-section">
+            <p>
+                Welcome to <strong>KODAI TECH</strong>. An independent ecosystem of lightweight, client-side developer tools designed to streamline your daily workflow without bloat or external dependencies.
+            </p>
+        </section>
 
-        <div class="quote-box" id="quoteDisplay">
-            Select a tool or check system status...
-        </div>
-        
-        <div class="button-group">
-            <button onclick="generateInsight()">Generate Insight 🚀</button>
-            <button class="secondary" onclick="resetSystem()">System Check ⚡</button>
-        </div>
-
-        <!-- DASHBOARD SECTION -->
-        <div class="dashboard">
-            <h3>⚡ System Status Dashboard</h3>
-            <p class="dashboard-desc">Real-time control panel for active resources and services.</p>
+        <!-- Utilities Grid Section -->
+        <section class="utilities-section">
+            <h2>⚡ Active Utility Workspace</h2>
             
-            <div class="status-grid">
-                <div class="status-card">
-                    <div class="status-title">Mascot Status</div>
-                    <div class="status-value green">Active 🐼</div>
+            <div class="utilities-grid">
+                <!-- Utility 1: JSON Validator -->
+                <div class="utility-card">
+                    <h3>JSON Validator</h3>
+                    <p class="utility-desc">Validate syntax structure and check for parsing errors in real-time.</p>
+                    <textarea id="jsonInput" placeholder="Paste JSON string here..."></textarea>
+                    <button onclick="validateJson()">Check Syntax</button>
+                    <div class="utility-output" id="jsonOutput">Awaiting input...</div>
                 </div>
-                <div class="status-card">
-                    <div class="status-title">Core Performance</div>
-                    <div class="status-value green" id="coreLevel">Optimal 99.9%</div>
+
+                <!-- Utility 2: Regex Matcher -->
+                <div class="utility-card">
+                    <h3>Regex Quick Matcher</h3>
+                    <p class="utility-desc">Test regular expressions against target strings instantly.</p>
+                    <input type="text" id="regexPattern" placeholder="Pattern (e.g. ^[a-z]+$)">
+                    <input type="text" id="regexString" placeholder="Test string...">
+                    <button onclick="testRegex()">Run Match</button>
+                    <div class="utility-output" id="regexOutput">Awaiting input...</div>
                 </div>
-                <div class="status-card">
-                    <div class="status-title">Pipeline State</div>
-                    <div class="status-value">Stable</div>
+
+                <!-- Utility 3: Base64 Encoder/Decoder -->
+                <div class="utility-card">
+                    <h3>Base64 Utility</h3>
+                    <p class="utility-desc">Encode plain text or decode Base64 strings on the fly.</p>
+                    <input type="text" id="base64Input" placeholder="Enter text or token...">
+                    <div class="btn-group-split">
+                        <button onclick="encodeBase64()">Encode</button>
+                        <button class="secondary-btn" onclick="decodeBase64()">Decode</button>
+                    </div>
+                    <div class="utility-output" id="base64Output">Awaiting input...</div>
                 </div>
-                <div class="status-card">
-                    <div class="status-title">Security Check</div>
-                    <div class="status-value green">Passed ⚡</div>
+
+                <!-- Utility 4: Secure Password Generator -->
+                <div class="utility-card">
+                    <h3>Password Generator</h3>
+                    <p class="utility-desc">Generate secure random keys and strings for configuration testing.</p>
+                    <div class="pass-controls">
+                        <span>Length: <strong id="passLenVal">16</strong></span>
+                        <input type="range" id="passLength" min="8" max="32" value="16" oninput="updateRangeLabel()">
+                    </div>
+                    <button onclick="generatePassword()">Generate Key</button>
+                    <div class="utility-output" id="passOutput">Awaiting action...</div>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
 
+    <!-- Application Script Logic -->
     <script>
-        const insights = [
-            "💡 Code modularity significantly reduces long-term maintenance overhead.",
-            "🚀 Clean architecture prevents technical debt during early development phases.",
-            "🐼 KODAI TECH: Efficiency and linearity across digital workflows.",
-            "⚡ Client-side resource optimization dramatically improves user experience.",
-            "🔮 Comprehensive documentation remains every developer's best ally."
-        ];
-
-        function generateInsight() {
-            const randomIndex = Math.floor(Math.random() * insights.length);
-            document.getElementById('quoteDisplay').innerText = insights[randomIndex];
+        // 1. JSON Validator Logic
+        function validateJson() {
+            const input = document.getElementById('jsonInput').value.trim();
+            const output = document.getElementById('jsonOutput');
+            if (!input) {
+                output.innerText = "Error: Input is empty.";
+                output.style.color = "#f85149";
+                return;
+            }
+            try {
+                JSON.parse(input);
+                output.innerText = "Success: Valid JSON syntax structure.";
+                output.style.color = "#3fb950";
+            } catch (e) {
+                output.innerText = `Syntax Error: ${e.message}`;
+                output.style.color = "#f85149";
+            }
         }
 
-        function resetSystem() {
-            document.getElementById('coreLevel').innerText = "100.0% (Synced)";
-            setTimeout(() => {
-                document.getElementById('coreLevel').innerText = "Optimal 99.9%";
-            }, 2000);
+        // 2. Regex Matcher Logic
+        function testRegex() {
+            const pattern = document.getElementById('regexPattern').value;
+            const str = document.getElementById('regexString').value;
+            const output = document.getElementById('regexOutput');
+            
+            if (!pattern) {
+                output.innerText = "Error: Pattern required.";
+                output.style.color = "#f85149";
+                return;
+            }
+            try {
+                const regex = new RegExp(pattern);
+                const isMatch = regex.test(str);
+                output.innerText = isMatch ? "Match found: true ⚡" : "Match found: false";
+                output.style.color = isMatch ? "#3fb950" : "#d29922";
+            } catch (e) {
+                output.innerText = `Invalid Regex: ${e.message}`;
+                output.style.color = "#f85149";
+            }
+        }
+
+        // 3. Base64 Logic
+        function encodeBase64() {
+            const val = document.getElementById('base64Input').value;
+            const output = document.getElementById('base64Output');
+            try {
+                output.innerText = btoa(val);
+                output.style.color = "#58a6ff";
+            } catch (e) {
+                output.innerText = "Encoding error.";
+                output.style.color = "#f85149";
+            }
+        }
+
+        function decodeBase64() {
+            const val = document.getElementById('base64Input').value;
+            const output = document.getElementById('base64Output');
+            try {
+                output.innerText = atob(val);
+                output.style.color = "#58a6ff";
+            } catch (e) {
+                output.innerText = "Decoding error: Invalid Base64 string.";
+                output.style.color = "#f85149";
+            }
+        }
+
+        // 4. Password Generator Logic
+        function updateRangeLabel() {
+            const len = document.getElementById('passLength').value;
+            document.getElementById('passLenVal').innerText = len;
+        }
+
+        function generatePassword() {
+            const length = document.getElementById('passLength').value;
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*!";
+            let password = "";
+            for (let i = 0; i < length; i++) {
+                password += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            const output = document.getElementById('passOutput');
+            output.innerText = password;
+            output.style.color = "#3fb950";
         }
     </script>
-
 </body>
 </html>
