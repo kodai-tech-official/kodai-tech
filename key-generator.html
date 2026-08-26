@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSPRNG Key Generator — Kodai Tech</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .tool-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #ffffff;
+        }
+        input[type="number"], select {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+        .checkbox-group {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5Rem;
+            cursor: pointer;
+            font-weight: normal;
+        }
+        .output-box {
+            position: relative;
+            margin-top: 1.5rem;
+        }
+        textarea {
+            width: 100%;
+            height: 120px;
+            padding: 1rem;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--accent-color);
+            font-family: var(--font-code);
+            font-size: 0.95rem;
+            resize: vertical;
+        }
+        button.btn-primary {
+            background-color: var(--accent-hover);
+            color: #ffffff;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            width: 100%;
+            margin-top: 1rem;
+        }
+        button.btn-primary:hover {
+            background-color: var(--accent-color);
+            color: #0d1117;
+        }
+        .btn-copy {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--border-color);
+            color: var(--text-primary);
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+        .btn-copy:hover {
+            background: var(--accent-color);
+            color: #0d1117;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="tool-container">
+        <a href="index.html" class="back-link">&larr; Back to Launchpad</a>
+        
+        <header style="border: none; margin-bottom: 1.5rem; padding-bottom: 0;">
+            <div class="header-title" style="display: flex; align-items: center; gap: 1rem;">
+                <img src="assets/img/logo.jpg" alt="Logo" style="width: 48px; height: 48px; border-radius: 8px; object-fit: cover;">
+                <div>
+                    <h1>CSPRNG Key Generator</h1>
+                    <p>Cryptographically secure pseudo-random number generator for secrets & tokens</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="form-group">
+            <label for="format">Generation Format</label>
+            <select id="format" onchange="toggleOptions()">
+                <option value="hex">Hexadecimal (64-char / 256-bit default)</option>
+                <option value="base64">Base64 URL-Safe</option>
+                <option value="password">Custom Password / Alphanumeric Secret</option>
+            </select>
+        </div>
+
+        <div class="form-group" id="length-group">
+            <label for="length">Byte Length / Character Length</label>
+            <input type="number" id="length" value="32" min="8" max="256">
+        </div>
+
+        <div class="form-group" id="password-options" style="display: none;">
+            <label>Password Options</label>
+            <div class="checkbox-group">
+                <label class="checkbox-label"><input type="checkbox" id="inc-upper" checked> Uppercase (A-Z)</label>
+                <label class="checkbox-label"><input type="checkbox" id="inc-lower" checked> Lowercase (a-z)</label>
+                <label class="checkbox-label"><input type="checkbox" id="inc-num" checked> Numbers (0-9)</label>
+                <label class="checkbox-label"><input type="checkbox" id="inc-sym" checked> Symbols (!@#$...)</label>
+            </div>
+        </div>
+
+        <button class="btn-primary" onclick="generateKey()">Generate Secure Key</button>
+
+        <div class="output-box">
+            <label for="output">Generated Output</label>
+            <textarea id="output" readonly placeholder="Your secure key will appear here..."></textarea>
+            <button class="btn-copy" onclick="copyToClipboard()">Copy</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleOptions() {
+            const format = document.getElementById('format').value;
+            const pwdOptions = document.getElementById('password-options');
+            const lengthInput = document.getElementById('length');
+            
+            if (format === 'password') {
+                pwdOptions.style.display = 'block';
+                lengthInput.value = '24';
+            } else {
+                pwdOptions.style.display = 'none';
+                lengthInput.value = '32';
+            }
+        }
+
+        function generateKey() {
+            const format = document.getElementById('format').value;
+            const length = parseInt(document.getElementById('length').value, 10) || 32;
+            let result = '';
+
+            if (format === 'hex') {
+                const array = new Uint8Array(length);
+                window.crypto.getRandomValues(array);
+                result = Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
+            } else if (format === 'base64') {
+                const array = new Uint8Array(length);
+                window.crypto.getRandomValues(array);
+                // Convert to base64 and make it URL-safe
+                let binary = '';
+                array.forEach(b => binary += String.fromCharCode(b));
+                result = btoa(binary)
+                    .replace(/\+/g, '-')
+                    .replace(/\//g, '_')
+                    .replace(/=/g, '');
+            } else if (format === 'password') {
+                let chars = '';
+                if (document.getElementById('inc-upper').checked) chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                if (document.getElementById('inc-lower').checked) chars += 'abcdefghijklmnopqrstuvwxyz';
+                if (document.getElementById('inc-num').checked) chars += '0123456789';
+                if (document.getElementById('inc-sym').checked) chars += '!@#$%^&*()_+-=[]{}|;:,.<>?';
+
+                if (chars.length === 0) {
+                    alert('Please select at least one character set!');
+                    return;
+                }
+
+                const array = new Uint32Array(length);
+                window.crypto.getRandomValues(array);
+                for (let i = 0; i < length; i++) {
+                    result += chars[array[i] % chars.length];
+                }
+            }
+
+            document.getElementById('output').value = result;
+        }
+
+        function copyToClipboard() {
+            const output = document.getElementById('output');
+            if (!output.value) return;
+            output.select();
+            document.execCommand('copy');
+            
+            const btn = document.querySelector('.btn-copy');
+            const originalText = btn.textContent;
+            btn.textContent = 'Copied!';
+            setTimeout(() => {
+                btn.textContent = originalText;
+            }, 1500);
+        }
+
+        // Generate on first load
+        generateKey();
+    </script>
+
+</body>
+</html>

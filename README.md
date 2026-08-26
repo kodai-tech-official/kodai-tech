@@ -51,12 +51,12 @@ The central hub (`index.html`) serves as a minimalist launchpad, allowing you to
 
 ```text
 kodaitech/
-│
 ├── index.html                  # Central Launchpad / Dashboard
 ├── assets/
-│   └── css/
-│       └── style.css           # Shared Industrial / Terminal Theme
-│
+│   ├── css/
+│   │   └── style.css           # Shared Industrial / Terminal Theme
+│   └── img/
+│       └── logo.jpg            # Central Industrial/Terminal Logo
 ├── key-generator.html          # 1. CSPRNG Cryptographic Key & Secret Generator
 ├── jwt-inspector.html          # 2. Local JWT Header & Payload Inspector
 ├── regex-workbench.html        # 3. Real-time Regex Testing & Matcher
