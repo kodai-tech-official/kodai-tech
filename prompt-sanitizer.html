@@ -9,199 +9,151 @@
         .tool-container {
             max-width: 900px;
             margin: 0 auto;
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border-terminal);
+            border-top: 3px solid var(--accent-primary);
             padding: 2rem;
         }
         .back-link {
             display: inline-block;
             margin-bottom: 1.5rem;
-            color: var(--accent-color);
+            color: var(--accent-primary);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
-        .back-link:hover {
-            text-decoration: underline;
-        }
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
+        .back-link:hover { text-decoration: underline; }
+        .form-group { margin-bottom: 1.5rem; }
         label {
             display: block;
             margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: #ffffff;
+            font-weight: 600;
+            color: var(--text-bright);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         textarea {
             width: 100%;
             height: 150px;
             padding: 1rem;
-            background-color: var(--bg-color);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            color: var(--text-primary);
-            font-family: var(--font-code);
-            font-size: 0.9rem;
+            background-color: var(--bg-terminal);
+            border: 1px solid var(--border-terminal);
+            border-radius: 2px;
+            color: var(--text-bright);
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
             resize: vertical;
         }
-        textarea:focus {
-            outline: none;
-            border-color: var(--accent-color);
-        }
+        textarea:focus { outline: none; border-color: var(--accent-primary); }
         .options-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 1rem;
             margin-bottom: 1.5rem;
-            background-color: var(--bg-color);
+            background-color: var(--bg-terminal);
             padding: 1rem;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
+            border: 1px solid var(--border-terminal);
+            border-radius: 2px;
         }
         .checkbox-label {
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             cursor: pointer;
-            color: var(--text-primary);
+            color: var(--text-main);
         }
         button.btn-primary {
-            background-color: var(--accent-hover);
-            color: #ffffff;
-            border: none;
+            background-color: transparent;
+            color: var(--accent-primary);
+            border: 1px solid var(--accent-primary);
             padding: 0.75rem 1.5rem;
-            border-radius: 6px;
-            font-size: 1rem;
+            border-radius: 2px;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
             font-weight: 600;
             cursor: pointer;
             width: 100%;
             margin-bottom: 1.5rem;
-            transition: background-color 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.15s ease;
         }
-        button.btn-primary:hover {
-            background-color: var(--accent-color);
-            color: #0d1117;
-        }
-        .output-container {
-            position: relative;
-        }
+        button.btn-primary:hover { background-color: var(--accent-primary); color: var(--bg-terminal); }
+        .output-container { position: relative; }
         .btn-copy {
             position: absolute;
-            top: 35px;
-            right: 10px;
-            background: var(--border-color);
-            color: var(--text-primary);
+            top: 32px;
+            right: 8px;
+            background: var(--border-terminal);
+            color: var(--text-bright);
             border: none;
-            padding: 0.4rem 0.8rem;
-            border-radius: 4px;
-            font-size: 0.8rem;
+            padding: 0.3rem 0.6rem;
+            border-radius: 2px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
             cursor: pointer;
+            text-transform: uppercase;
         }
-        .btn-copy:hover {
-            background: var(--accent-color);
-            color: #0d1117;
-        }
-        .stats {
-            display: flex;
-            gap: 2rem;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin-top: 0.5rem;
-            font-family: var(--font-code);
-        }
+        .btn-copy:hover { background: var(--accent-primary); color: var(--bg-terminal); }
+        .stats { display: flex; gap: 2rem; font-size: 0.75rem; color: var(--accent-warning); margin-top: 0.5rem; font-family: var(--font-mono); }
     </style>
 </head>
 <body>
-
     <div class="tool-container">
-        <a href="index.html" class="back-link">&larr; Back to Launchpad</a>
-        
+        <a href="index.html" class="back-link">&larr; Return to Launchpad</a>
         <header style="border: none; margin-bottom: 1.5rem; padding-bottom: 0;">
             <div class="header-title" style="display: flex; align-items: center; gap: 1rem;">
-                <img src="assets/img/logo.jpg" alt="Logo" style="width: 48px; height: 48px; border-radius: 8px; object-fit: cover;">
+                <img src="assets/img/logo.jpg" alt="Logo" style="width: 48px; height: 48px; border-radius: 2px; object-fit: cover; border: 1px solid var(--accent-primary);">
                 <div>
                     <h1>Prompt Sanitizer</h1>
-                    <p>AI prompt context reducer, log cleaner & whitespace optimizer</p>
+                    <p>AI context reducer, log cleaner & whitespace optimizer</p>
                 </div>
             </div>
         </header>
-
         <div class="form-group">
-            <label for="input-prompt">Raw Input Prompt or Log</label>
-            <textarea id="input-prompt" placeholder="Paste your messy log or long prompt here..."></textarea>
+            <label for="input-prompt">Raw Input Stream / Log</label>
+            <textarea id="input-prompt" placeholder="Paste messy log or prompt..."></textarea>
         </div>
-
         <div class="options-grid">
             <label class="checkbox-label"><input type="checkbox" id="opt-comments" checked> Strip Code Comments</label>
             <label class="checkbox-label"><input type="checkbox" id="opt-whitespace" checked> Collapse Whitespace</label>
             <label class="checkbox-label"><input type="checkbox" id="opt-newlines" checked> Remove Empty Lines</label>
-            <label class="checkbox-label"><input type="checkbox" id="opt-secrets"> Mask API Keys / Tokens</label>
+            <label class="checkbox-label"><input type="checkbox" id="opt-secrets"> Mask API Keys</label>
         </div>
-
-        <button class="btn-primary" onclick="sanitizePrompt()">Sanitize & Reduce Context</button>
-
+        <button class="btn-primary" onclick="sanitizePrompt()">// Execute Sanitization</button>
         <div class="form-group output-container">
-            <label for="output-prompt">Optimized Output</label>
+            <label for="output-prompt">Optimized Buffer Output</label>
             <button class="btn-copy" onclick="copyOutput()">Copy</button>
-            <textarea id="output-prompt" readonly placeholder="Sanitized result will appear here..."></textarea>
-            <div class="stats" id="stats-box">Characters: 0 &bull; Reduced: 0%</div>
+            <textarea id="output-prompt" readonly placeholder="Clean output..."></textarea>
+            <div class="stats" id="stats-box">Original: 0 &bull; Optimized: 0 &bull; Reduction: 0%</div>
         </div>
     </div>
-
     <script>
         function sanitizePrompt() {
             let text = document.getElementById('input-prompt').value;
             const originalLength = text.length;
-
-            if (!text) {
-                document.getElementById('output-prompt').value = '';
-                document.getElementById('stats-box').innerHTML = 'Characters: 0 &bull; Reduced: 0%';
-                return;
-            }
-
-            // 1. Strip Code Comments (Single line // and multi-line /* ... */)
-            if (document.getElementById('opt-comments').checked) {
-                text = text.replace(/\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*/g, '$1');
-            }
-
-            // 2. Remove Empty Lines
-            if (document.getElementById('opt-newlines').checked) {
-                text = text.split('\n').filter(line => line.trim() !== '').join('\n');
-            }
-
-            // 3. Collapse Whitespace (Multiple spaces/tabs into single space per line)
-            if (document.getElementById('opt-whitespace').checked) {
-                text = text.split('\n').map(line => line.replace(/[ \t]+/g, ' ').trim()).join('\n');
-            }
-
-            // 4. Mask potential API Keys / Secrets (basic regex for sk-, Bearer, etc.)
-            if (document.getElementById('opt-secrets').checked) {
-                text = text.replace(/(sk-[a-zA-Z0-9]{20,}|bearer\s+[a-zA-Z0-9._-]+|api[_-]?key[=:]\s*['"]?[a-zA-Z0-9-_]{16,}['"]?)/gi, '[REDACTED_SECRET]');
-            }
-
+            if (!text) { document.getElementById('output-prompt').value = ''; document.getElementById('stats-box').innerHTML = 'Buffer empty'; return; }
+            if (document.getElementById('opt-comments').checked) { text = text.replace(/\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*/g, '$1'); }
+            if (document.getElementById('opt-newlines').checked) { text = text.split('\n').filter(l => l.trim() !== '').join('\n'); }
+            if (document.getElementById('opt-whitespace').checked) { text = text.split('\n').map(l => l.replace(/[ \t]+/g, ' ').trim()).join('\n'); }
+            if (document.getElementById('opt-secrets').checked) { text = text.replace(/(sk-[a-zA-Z0-9]{20,}|bearer\s+[a-zA-Z0-9._-]+|api[_-]?key[=:]\s*['"]?[a-zA-Z0-9-_]{16,}['"]?)/gi, '[REDACTED_SECRET]'); }
             document.getElementById('output-prompt').value = text;
-
             const newLength = text.length;
             const reduction = originalLength > 0 ? Math.max(0, ((originalLength - newLength) / originalLength) * 100).toFixed(1) : 0;
-            document.getElementById('stats-box').innerHTML = `Original: ${originalLength} chars &bull; Sanitized: ${newLength} chars &bull; Reduction: ${reduction}%`;
+            document.getElementById('stats-box').innerHTML = `Original: ${originalLength}c &bull; Optimized: ${newLength}c &bull; Reduction: ${reduction}%`;
         }
-
         function copyOutput() {
             const output = document.getElementById('output-prompt');
             if (!output.value) return;
             output.select();
             document.execCommand('copy');
-            
             const btn = document.querySelector('.btn-copy');
-            const originalText = btn.textContent;
-            btn.textContent = 'Copied!';
-            setTimeout(() => {
-                btn.textContent = originalText;
-            }, 1500);
+            btn.textContent = 'OK';
+            setTimeout(() => { btn.textContent = 'Copy'; }, 1500);
         }
     </script>
-
 </body>
 </html>

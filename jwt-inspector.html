@@ -9,208 +9,153 @@
         .tool-container {
             max-width: 900px;
             margin: 0 auto;
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border-terminal);
+            border-top: 3px solid var(--accent-primary);
             padding: 2rem;
         }
         .back-link {
             display: inline-block;
             margin-bottom: 1.5rem;
-            color: var(--accent-color);
+            color: var(--accent-primary);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
-        .back-link:hover {
-            text-decoration: underline;
-        }
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
+        .back-link:hover { text-decoration: underline; }
+        .form-group { margin-bottom: 1.5rem; }
         label {
             display: block;
             margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: #ffffff;
+            font-weight: 600;
+            color: var(--text-bright);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         textarea {
             width: 100%;
             height: 100px;
             padding: 1rem;
-            background-color: var(--bg-color);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            color: var(--text-primary);
-            font-family: var(--font-code);
-            font-size: 0.9rem;
+            background-color: var(--bg-terminal);
+            border: 1px solid var(--border-terminal);
+            border-radius: 2px;
+            color: var(--text-bright);
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
             resize: vertical;
         }
-        textarea:focus {
-            outline: none;
-            border-color: var(--accent-color);
-        }
+        textarea:focus { outline: none; border-color: var(--accent-primary); }
         .grid-outputs {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1.5rem;
             margin-top: 1.5rem;
         }
-        @media (max-width: 768px) {
-            .grid-outputs {
-                grid-template-columns: 1fr;
-            }
-        }
+        @media (max-width: 768px) { .grid-outputs { grid-template-columns: 1fr; } }
         .output-box {
-            background-color: var(--bg-color);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
+            background-color: var(--bg-terminal);
+            border: 1px solid var(--border-terminal);
+            border-radius: 2px;
             padding: 1rem;
         }
         .output-box h3 {
-            font-size: 1rem;
-            color: var(--accent-color);
+            font-size: 0.85rem;
+            color: var(--accent-primary);
             margin-bottom: 0.5rem;
-            font-family: var(--font-code);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            font-family: var(--font-mono);
+            text-transform: uppercase;
         }
         pre {
-            background-color: #090d12;
+            background-color: #030406;
             padding: 0.75rem;
-            border-radius: 4px;
-            font-family: var(--font-code);
-            font-size: 0.85rem;
-            color: #7ee787;
+            border-radius: 2px;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--accent-success);
             overflow-x: auto;
             max-height: 250px;
+            border: 1px solid var(--border-terminal);
         }
         .status-badge {
             display: inline-block;
-            padding: 0.25rem 0.6rem;
-            border-radius: 4px;
-            font-size: 0.8rem;
+            padding: 0.3rem 0.6rem;
+            border-radius: 2px;
+            font-size: 0.75rem;
             font-weight: 600;
             margin-bottom: 1rem;
+            font-family: var(--font-mono);
+            text-transform: uppercase;
         }
-        .status-valid {
-            background-color: rgba(46, 160, 67, 0.15);
-            color: #3fb950;
-            border: 1px solid rgba(46, 160, 67, 0.3);
-        }
-        .status-expired {
-            background-color: rgba(248, 81, 73, 0.15);
-            color: #f85149;
-            border: 1px solid rgba(248, 81, 73, 0.3);
-        }
-        .status-invalid {
-            background-color: rgba(210, 153, 34, 0.15);
-            color: #d29922;
-            border: 1px solid rgba(210, 153, 34, 0.3);
-        }
+        .status-valid { background-color: rgba(16, 185, 129, 0.1); color: var(--accent-success); border: 1px solid rgba(16, 185, 129, 0.3); }
+        .status-expired { background-color: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); }
+        .status-invalid { background-color: rgba(245, 158, 11, 0.1); color: var(--accent-warning); border: 1px solid rgba(245, 158, 11, 0.3); }
     </style>
 </head>
 <body>
-
     <div class="tool-container">
-        <a href="index.html" class="back-link">&larr; Back to Launchpad</a>
-        
+        <a href="index.html" class="back-link">&larr; Return to Launchpad</a>
         <header style="border: none; margin-bottom: 1.5rem; padding-bottom: 0;">
             <div class="header-title" style="display: flex; align-items: center; gap: 1rem;">
-                <img src="assets/img/logo.jpg" alt="Logo" style="width: 48px; height: 48px; border-radius: 8px; object-fit: cover;">
+                <img src="assets/img/logo.jpg" alt="Logo" style="width: 48px; height: 48px; border-radius: 2px; object-fit: cover; border: 1px solid var(--accent-primary);">
                 <div>
                     <h1>JWT Inspector</h1>
                     <p>Client-side JSON Web Token decoder & claims analyzer</p>
                 </div>
             </div>
         </header>
-
         <div class="form-group">
-            <label for="jwt-input">Paste JWT Token Here</label>
-            <textarea id="jwt-input" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." oninput="inspectJWT()"></textarea>
+            <label for="jwt-input">Paste JWT Token</label>
+            <textarea id="jwt-input" placeholder="eyJhbGciOiJIUzI1NiIsIn..." oninput="inspectJWT()"></textarea>
         </div>
-
         <div id="token-status"></div>
-
         <div class="grid-outputs">
             <div class="output-box">
                 <h3>Header</h3>
-                <pre id="jwt-header">// Header info will appear here</pre>
+                <pre id="jwt-header">// Header buffer empty</pre>
             </div>
             <div class="output-box">
-                <h3>Payload (Claims)</h3>
-                <pre id="jwt-payload">// Payload claims will appear here</pre>
+                <h3>Payload Claims</h3>
+                <pre id="jwt-payload">// Payload buffer empty</pre>
             </div>
         </div>
     </div>
-
     <script>
         function base64UrlDecode(str) {
             let output = str.replace(/-/g, '+').replace(/_/g, '/');
-            switch (output.length % 4) {
-                case 0: break;
-                case 2: output += '=='; break;
-                case 3: output += '='; break;
-                default: throw new Error('Illegal base64url string!');
-            }
-            try {
-                return decodeURIComponent(atob(output).split('').map(c => {
-                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-                }).join(''));
-            } catch (e) {
-                return atob(output);
-            }
+            switch (output.length % 4) { case 0: break; case 2: output += '=='; break; case 3: output += '='; break; }
+            return decodeURIComponent(atob(output).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
         }
-
         function inspectJWT() {
             const rawToken = document.getElementById('jwt-input').value.trim();
             const headerEl = document.getElementById('jwt-header');
             const payloadEl = document.getElementById('jwt-payload');
             const statusEl = document.getElementById('token-status');
-
-            if (!rawToken) {
-                headerEl.textContent = '// Header info will appear here';
-                payloadEl.textContent = '// Payload claims will appear here';
-                statusEl.innerHTML = '';
-                return;
-            }
-
+            if (!rawToken) { headerEl.textContent = '// Header buffer empty'; payloadEl.textContent = '// Payload buffer empty'; statusEl.innerHTML = ''; return; }
             const parts = rawToken.split('.');
-            if (parts.length !== 3) {
-                statusEl.innerHTML = '<span class="status-badge status-invalid">Invalid JWT format (must have 3 parts separated by dots)</span>';
-                headerEl.textContent = '// Invalid Token';
-                payloadEl.textContent = '// Invalid Token';
-                return;
-            }
-
+            if (parts.length !== 3) { statusEl.innerHTML = '<span class="status-badge status-invalid">ERR: Invalid structure (3 parts expected)</span>'; headerEl.textContent = '// Error'; payloadEl.textContent = '// Error'; return; }
             try {
-                const decodedHeader = JSON.parse(base64UrlDecode(parts[0]));
-                const decodedPayload = JSON.parse(base64UrlDecode(parts[1]));
-
-                headerEl.textContent = JSON.stringify(decodedHeader, null, 2);
-                payloadEl.textContent = JSON.stringify(decodedPayload, null, 2);
-
-                // Check Expiration
-                if (decodedPayload.exp) {
-                    const currentTime = Math.floor(Date.now() / 1000);
-                    if (decodedPayload.exp < currentTime) {
-                        const expDate = new Date(decodedPayload.exp * 1000).toLocaleString();
-                        statusEl.innerHTML = `<span class="status-badge status-expired">Status: EXPIRED (Expired on ${expDate})</span>`;
+                headerEl.textContent = JSON.stringify(JSON.parse(base64UrlDecode(parts[0])), null, 2);
+                const payload = JSON.parse(base64UrlDecode(parts[1]));
+                payloadEl.textContent = JSON.stringify(payload, null, 2);
+                if (payload.exp) {
+                    const now = Math.floor(Date.now() / 1000);
+                    const expDate = new Date(payload.exp * 1000).toLocaleString();
+                    if (payload.exp < now) {
+                        statusEl.innerHTML = `<span class="status-badge status-expired">STATUS: EXPIRED [${expDate}]</span>`;
                     } else {
-                        const expDate = new Date(decodedPayload.exp * 1000).toLocaleString();
-                        statusEl.innerHTML = `<span class="status-badge status-valid">Status: VALID (Expires on ${expDate})</span>`;
+                        statusEl.innerHTML = `<span class="status-badge status-valid">STATUS: VALID [Expires: ${expDate}]</span>`;
                     }
                 } else {
-                    statusEl.innerHTML = '<span class="status-badge status-invalid">Status: NO EXPIRATION CLAIM (exp) FOUND</span>';
+                    statusEl.innerHTML = '<span class="status-badge status-invalid">STATUS: NO EXP CLAIM (exp) FOUND</span>';
                 }
-
-            } catch (err) {
-                statusEl.innerHTML = '<span class="status-badge status-invalid">Error decoding token parts (malformed base64 or JSON)</span>';
-                headerEl.textContent = '// Parsing Error';
-                payloadEl.textContent = '// Parsing Error';
+            } catch (e) {
+                statusEl.innerHTML = '<span class="status-badge status-invalid">ERR: Parsing failed</span>';
+                headerEl.textContent = '// Malformed';
+                payloadEl.textContent = '// Malformed';
             }
         }
     </script>
-
 </body>
 </html>
