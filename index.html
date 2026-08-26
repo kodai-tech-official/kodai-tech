@@ -21,6 +21,18 @@
             border: 1px solid #30363d;
             box-shadow: 0 8px 24px rgba(0,0,0,0.5);
         }
+        /* Stili per il Logo del Panda Rosso */
+        .logo-container {
+            margin-bottom: 15px;
+        }
+        .logo-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid #58a6ff;
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(88, 166, 255, 0.3);
+        }
         h1 {
             color: #58a6ff;
             margin-bottom: 5px;
@@ -56,6 +68,13 @@
             align-items: center;
             justify-content: center;
         }
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
         button {
             background-color: #238636;
             color: white;
@@ -66,10 +85,19 @@
             border-radius: 6px;
             cursor: pointer;
             transition: background 0.2s;
-            margin-bottom: 30px;
         }
         button:hover {
             background-color: #2ea043;
+        }
+        button.secondary {
+            background-color: #30363d;
+            color: #c9d1d9;
+            border: 1px solid #484f58;
+        }
+        button.secondary:hover {
+            background-color: #388bfd;
+            color: white;
+            border-color: #388bfd;
         }
         .dashboard {
             border-top: 1px solid #30363d;
@@ -123,10 +151,14 @@
 <body>
 
     <div class="container">
+        <!-- Logo ufficiale del Panda Rosso -->
+        <div class="logo-container">
+            <img src="assets/logo.png" alt="KODAI TECH Red Panda Mascot" class="logo-img" onerror="this.src='https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=150&auto=format&fit=crop&q=80'">
+        </div>
+
         <h1>KODAI TECH ☕🐼</h1>
         <p class="subtitle">Quantum Coffee & Code Generator</p>
         
-        <!-- Welcome text in English -->
         <div class="welcome-text">
             👋 <strong>Welcome to the KODAI TECH headquarters!</strong> This space bridges software engineering, quantum physics, and caffeine. Use the generator below for random nerd thoughts and monitor our core system vitals in real-time.
         </div>
@@ -135,7 +167,10 @@
             Click the button below to generate a quantum thought...
         </div>
         
-        <button onclick="generateQuote()">Generate Quantum Quote 🚀</button>
+        <div class="button-group">
+            <button onclick="generateQuote()">Generate Quantum Quote 🚀</button>
+            <button class="secondary" onclick="addCoffee()">☕ Brew Coffee (<span id="coffeeCount">42</span>)</button>
+        </div>
 
         <!-- DASHBOARD SECTION -->
         <div class="dashboard">
@@ -177,12 +212,21 @@
             "🐼 Red panda energy: 90% cuteness, 10% pure algorithmic genius."
         ];
 
+        let cupsOfCoffee = 42;
+
         function generateQuote() {
             const randomIndex = Math.floor(Math.random() * quotes.length);
             document.getElementById('quoteDisplay').innerText = quotes[randomIndex];
             
             const randomCoffee = (90 + Math.random() * 9.9).toFixed(1);
             document.getElementById('coffeeLevel').innerText = randomCoffee + "% ☕";
+        }
+
+        function addCoffee() {
+            cupsOfCoffee++;
+            document.getElementById('coffeeCount').innerText = cupsOfCoffee;
+            // Boost temporaneo del livello di espresso
+            document.getElementById('coffeeLevel').innerText = "100.0% ☕ (Turbo!)";
         }
     </script>
 
