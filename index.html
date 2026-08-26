@@ -2,78 +2,200 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-string, initial-scale=1.0">
-    <title>Kodai Tech — Central Launchpad</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kodai Tech // Launchpad</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 2px solid var(--border-terminal);
+            padding-bottom: 2rem;
+            margin-bottom: 3rem;
+        }
+        .brand-box {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .brand-logo {
+            width: 72px;
+            height: 72px;
+            border: 2px solid var(--accent-primary);
+            border-radius: 2px;
+            object-fit: cover;
+        }
+        .brand-info h1 {
+            font-size: 1.8rem;
+            color: var(--text-bright);
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.25rem;
+        }
+        .brand-info p {
+            color: var(--accent-warning);
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .slogan-box {
+            text-align: right;
+            font-family: var(--font-mono);
+            color: var(--accent-primary);
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-left: 2px solid var(--border-terminal);
+            padding-left: 1.5rem;
+        }
+        .section-title {
+            font-size: 0.85rem;
+            color: var(--text-bright);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .section-title::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: var(--border-terminal);
+        }
+        .launchpad-stream {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 1rem;
+        }
+        .tool-row-item {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border-terminal);
+            border-left: 3px solid var(--border-terminal);
+            padding: 1.25rem 1.5rem;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.1s ease;
+        }
+        .tool-row-item:hover {
+            border-color: var(--accent-primary);
+            border-left-color: var(--accent-primary);
+            background-color: #111822;
+        }
+        .tool-row-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        .tool-row-item h3 {
+            font-size: 0.95rem;
+            color: var(--text-bright);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .tool-code {
+            font-size: 0.7rem;
+            color: var(--accent-warning);
+            background: rgba(245, 158, 11, 0.08);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            padding: 0.1rem 0.3rem;
+            border-radius: 2px;
+        }
+        .tool-row-item p {
+            font-size: 0.8rem;
+            color: var(--text-main);
+        }
+    </style>
 </head>
 <body>
 
-    <header>
-        <img src="assets/img/logo.jpg" alt="Kodai Tech Logo" class="logo">
-        <div class="header-title">
-            <h1>Kodai Tech</h1>
-            <p>Industrial & Developer Utilities Dashboard (Code, AI & Tech)</p>
+    <header class="dashboard-header">
+        <div class="brand-box">
+            <img src="assets/img/logo.jpg" alt="Kodai Tech Logo" class="brand-logo">
+            <div class="brand-info">
+                <h1>Kodai Tech Suite</h1>
+                <p>System Control Panel & Developer Utilities</p>
+            </div>
+        </div>
+        <div class="slogan-box">
+            // Code local. Think fast.
         </div>
     </header>
 
-    <main class="launchpad-grid">
-        <!-- 1. Key Generator -->
-        <a href="key-generator.html" class="tool-card">
-            <div>
-                <h3>CSPRNG Key Generator</h3>
-                <p>Generates cryptographic keys, secrets, and secure tokens securely on the client-side.</p>
-            </div>
-            <span class="tool-badge">key-generator.html</span>
-        </a>
+    <main>
+        <div class="section-title">Active Modules // Launchpad Registry</div>
+        
+        <div class="launchpad-stream">
+            <a href="key-generator.html" class="tool-row-item">
+                <div>
+                    <div class="tool-row-header">
+                        <h3>CSPRNG Key Generator</h3>
+                        <span class="tool-code">MOD_01</span>
+                    </div>
+                    <p>Cryptographically secure pseudo-random secret generation</p>
+                </div>
+            </a>
 
-        <!-- 2. JWT Inspector -->
-        <a href="jwt-inspector.html" class="tool-card">
-            <div>
-                <h3>JWT Inspector</h3>
-                <p>Locally inspects and decodes JWT headers, payloads, and expiration timestamps.</p>
-            </div>
-            <span class="tool-badge">jwt-inspector.html</span>
-        </a>
+            <a href="jwt-inspector.html" class="tool-row-item">
+                <div>
+                    <div class="tool-row-header">
+                        <h3>JWT Inspector</h3>
+                        <span class="tool-code">MOD_02</span>
+                    </div>
+                    <p>Client-side JSON Web Token decoder & claims analyzer</p>
+                </div>
+            </a>
 
-        <!-- 3. Regex Workbench -->
-        <a href="regex-workbench.html" class="tool-card">
-            <div>
-                <h3>Regex Workbench</h3>
-                <p>Real-time regular expression testing, matching, and debugging utility.</p>
-            </div>
-            <span class="tool-badge">regex-workbench.html</span>
-        </a>
+            <a href="regex-workbench.html" class="tool-row-item">
+                <div>
+                    <div class="tool-row-header">
+                        <h3>Regex Workbench</h3>
+                        <span class="tool-code">MOD_03</span>
+                    </div>
+                    <p>Real-time regular expression testing & parsing utility</p>
+                </div>
+            </a>
 
-        <!-- 4. Prompt Sanitizer -->
-        <a href="prompt-sanitizer.html" class="tool-card">
-            <div>
-                <h3>Prompt Sanitizer</h3>
-                <p>AI prompt context reducer, log cleaner, and sensitive data filter.</p>
-            </div>
-            <span class="tool-badge">prompt-sanitizer.html</span>
-        </a>
+            <a href="prompt-sanitizer.html" class="tool-row-item">
+                <div>
+                    <div class="tool-row-header">
+                        <h3>Prompt Sanitizer</h3>
+                        <span class="tool-code">MOD_04</span>
+                    </div>
+                    <p>AI context reducer, log cleaner & whitespace optimizer</p>
+                </div>
+            </a>
 
-        <!-- 5. Env Masker -->
-        <a href="env-masker.html" class="tool-card">
-            <div>
-                <h3>Env & Config Masker</h3>
-                <p>Safely masks and sanitizes local `.env` files and configuration secrets before sharing.</p>
-            </div>
-            <span class="tool-badge">env-masker.html</span>
-        </a>
+            <a href="env-masker.html" class="tool-row-item">
+                <div>
+                    <div class="tool-row-header">
+                        <h3>Env & Config Masker</h3>
+                        <span class="tool-code">MOD_05</span>
+                    </div>
+                    <p>Safely sanitize `.env` files before sharing</p>
+                </div>
+            </a>
 
-        <!-- 6. JSON Converter -->
-        <a href="json-converter.html" class="tool-card">
-            <div>
-                <h3>JSON-to-TS Converter</h3>
-                <p>Converts raw JSON payloads into clean TypeScript interfaces or validation schemas.</p>
-            </div>
-            <span class="tool-badge">json-converter.html</span>
-        </a>
+            <a href="json-converter.html" class="tool-row-item">
+                <div>
+                    <div class="tool-row-header">
+                        <h3>JSON-to-TS Converter</h3>
+                        <span class="tool-code">MOD_06</span>
+                    </div>
+                    <p>Convert raw JSON payloads into TypeScript interfaces</p>
+                </div>
+            </a>
+        </div>
     </main>
 
     <footer>
-        <p>&copy; 2026 Kodai Tech &bull; Code local. Think fast</p>
+        Kodai Tech Systems &bull; Local Execution Environment &bull; All rights reserved.
     </footer>
 
 </body>

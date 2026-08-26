@@ -6,170 +6,92 @@
     <title>CSPRNG Key Generator — Kodai Tech</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
-        .tool-container {
-            max-width: 850px;
-            margin: 0 auto;
-            background-color: var(--panel-bg);
-            border: 1px solid var(--border-terminal);
-            border-top: 3px solid var(--accent-primary);
-            padding: 2rem;
-        }
-        .back-link {
-            display: inline-block;
-            margin-bottom: 1.5rem;
-            color: var(--accent-primary);
-            text-decoration: none;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-        .back-link:hover {
-            text-decoration: underline;
-        }
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--text-bright);
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        input[type="number"], select {
-            width: 100%;
-            padding: 0.75rem;
-            background-color: var(--bg-terminal);
-            border: 1px solid var(--border-terminal);
-            border-radius: 2px;
-            color: var(--text-bright);
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-        }
-        input[type="number"]:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--accent-primary);
-        }
-        .checkbox-group {
+        .options-row {
             display: flex;
-            gap: 1.5rem;
+            gap: 2rem;
             flex-wrap: wrap;
-            margin-top: 0.5rem;
+            padding: 1rem 0;
+            border-top: 1px solid var(--border-terminal);
+            border-bottom: 1px solid var(--border-terminal);
+            margin: 1.5rem 0;
         }
         .checkbox-label {
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            font-size: 0.8rem;
             cursor: pointer;
-            font-weight: normal;
-            font-size: 0.85rem;
             color: var(--text-main);
-        }
-        .output-box {
-            position: relative;
-            margin-top: 1.5rem;
-        }
-        textarea {
-            width: 100%;
-            height: 120px;
-            padding: 1rem;
-            background-color: var(--bg-terminal);
-            border: 1px solid var(--border-terminal);
-            border-radius: 2px;
-            color: var(--accent-success);
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            resize: vertical;
-        }
-        button.btn-primary {
-            background-color: transparent;
-            color: var(--accent-primary);
-            border: 1px solid var(--accent-primary);
-            padding: 0.75rem 1.5rem;
-            border-radius: 2px;
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 1rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.15s ease;
         }
-        button.btn-primary:hover {
-            background-color: var(--accent-primary);
-            color: var(--bg-terminal);
-        }
+        .output-wrapper { position: relative; }
         .btn-copy {
             position: absolute;
             top: 32px;
-            right: 8px;
+            right: 10px;
             background: var(--border-terminal);
             color: var(--text-bright);
             border: none;
             padding: 0.3rem 0.6rem;
-            border-radius: 2px;
             font-family: var(--font-mono);
             font-size: 0.75rem;
             cursor: pointer;
             text-transform: uppercase;
         }
-        .btn-copy:hover {
-            background: var(--accent-primary);
-            color: var(--bg-terminal);
-        }
+        .btn-copy:hover { background: var(--accent-primary); color: var(--bg-terminal); }
     </style>
 </head>
 <body>
 
-    <div class="tool-container">
-        <a href="index.html" class="back-link">&larr; Return to Launchpad</a>
-        
-        <header style="border: none; margin-bottom: 1.5rem; padding-bottom: 0;">
-            <div class="header-title" style="display: flex; align-items: center; gap: 1rem;">
-                <img src="assets/img/logo.jpg" alt="Logo" style="width: 48px; height: 48px; border-radius: 2px; object-fit: cover; border: 1px solid var(--accent-primary);">
-                <div>
-                    <h1>CSPRNG Key Generator</h1>
-                    <p>Cryptographically secure pseudo-random secret generation</p>
-                </div>
+    <header class="app-header">
+        <div class="header-left">
+            <img src="assets/img/logo.jpg" alt="Logo" class="logo">
+            <div class="header-title">
+                <h1>CSPRNG Key Generator</h1>
+                <p>Cryptographically secure pseudo-random secret generation</p>
             </div>
-        </header>
-
-        <div class="form-group">
-            <label for="format">Generation Format</label>
-            <select id="format" onchange="toggleOptions()">
-                <option value="hex">Hexadecimal (64-char / 256-bit default)</option>
-                <option value="base64">Base64 URL-Safe</option>
-                <option value="password">Custom Password / Alphanumeric Secret</option>
-            </select>
         </div>
+        <a href="index.html" class="back-link">&larr; Launchpad</a>
+    </header>
 
-        <div class="form-group" id="length-group">
-            <label for="length">Byte Length / Character Length</label>
-            <input type="number" id="length" value="32" min="8" max="256">
-        </div>
+    <main class="workspace">
+        <div class="panel">
+            <div class="form-group">
+                <label for="format">Generation Format</label>
+                <select id="format" onchange="toggleOptions()">
+                    <option value="hex">Hexadecimal (64-char / 256-bit default)</option>
+                    <option value="base64">Base64 URL-Safe</option>
+                    <option value="password">Custom Password / Alphanumeric Secret</option>
+                </select>
+            </div>
 
-        <div class="form-group" id="password-options" style="display: none;">
-            <label>Password Character Sets</label>
-            <div class="checkbox-group">
+            <div class="form-group" id="length-group">
+                <label for="length">Byte Length / Character Length</label>
+                <input type="number" id="length" value="32" min="8" max="256">
+            </div>
+
+            <div class="options-row" id="password-options" style="display: none;">
                 <label class="checkbox-label"><input type="checkbox" id="inc-upper" checked> Uppercase (A-Z)</label>
                 <label class="checkbox-label"><input type="checkbox" id="inc-lower" checked> Lowercase (a-z)</label>
                 <label class="checkbox-label"><input type="checkbox" id="inc-num" checked> Numbers (0-9)</label>
                 <label class="checkbox-label"><input type="checkbox" id="inc-sym" checked> Symbols (!@#$...)</label>
             </div>
+
+            <button class="btn-primary" onclick="generateKey()">// Execute Generation</button>
         </div>
 
-        <button class="btn-primary" onclick="generateKey()">// Execute Generation</button>
-
-        <div class="output-box">
-            <label for="output">Generated Output</label>
-            <textarea id="output" readonly placeholder="Secure output buffer..."></textarea>
-            <button class="btn-copy" onclick="copyToClipboard()">Copy</button>
+        <div class="panel output-wrapper">
+            <div class="form-group">
+                <label for="output">Generated Output Buffer</label>
+                <button class="btn-copy" onclick="copyToClipboard()">Copy</button>
+                <textarea id="output" readonly style="height: 120px;" placeholder="Secure output buffer..."></textarea>
+            </div>
         </div>
-    </div>
+    </main>
+
+    <footer>
+        Kodai Tech // Code local. Think fast.
+    </footer>
 
     <script>
         function toggleOptions() {
@@ -177,19 +99,17 @@
             const pwdOptions = document.getElementById('password-options');
             const lengthInput = document.getElementById('length');
             if (format === 'password') {
-                pwdOptions.style.display = 'block';
+                pwdOptions.style.display = 'flex';
                 lengthInput.value = '24';
             } else {
                 pwdOptions.style.display = 'none';
                 lengthInput.value = '32';
             }
         }
-
         function generateKey() {
             const format = document.getElementById('format').value;
             const length = parseInt(document.getElementById('length').value, 10) || 32;
             let result = '';
-
             if (format === 'hex') {
                 const array = new Uint8Array(length);
                 window.crypto.getRandomValues(array);
@@ -207,16 +127,12 @@
                 if (document.getElementById('inc-num').checked) chars += '0123456789';
                 if (document.getElementById('inc-sym').checked) chars += '!@#$%^&*()_+-=[]{}|;:,.<>?';
                 if (chars.length === 0) { alert('Select at least one character set.'); return; }
-
                 const array = new Uint32Array(length);
                 window.crypto.getRandomValues(array);
-                for (let i = 0; i < length; i++) {
-                    result += chars[array[i] % chars.length];
-                }
+                for (let i = 0; i < length; i++) { result += chars[array[i] % chars.length]; }
             }
             document.getElementById('output').value = result;
         }
-
         function copyToClipboard() {
             const output = document.getElementById('output');
             if (!output.value) return;
@@ -226,7 +142,6 @@
             btn.textContent = 'OK';
             setTimeout(() => { btn.textContent = 'Copy'; }, 1500);
         }
-
         generateKey();
     </script>
 </body>

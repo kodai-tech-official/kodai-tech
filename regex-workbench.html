@@ -6,45 +6,7 @@
     <title>Regex Workbench — Kodai Tech</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
-        .tool-container {
-            max-width: 900px;
-            margin: 0 auto;
-            background-color: var(--panel-bg);
-            border: 1px solid var(--border-terminal);
-            border-top: 3px solid var(--accent-primary);
-            padding: 2rem;
-        }
-        .back-link {
-            display: inline-block;
-            margin-bottom: 1.5rem;
-            color: var(--accent-primary);
-            text-decoration: none;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-        .back-link:hover { text-decoration: underline; }
-        .form-group { margin-bottom: 1.5rem; }
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--text-bright);
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
         .regex-row { display: flex; gap: 1rem; }
-        input[type="text"] {
-            flex: 1;
-            padding: 0.75rem;
-            background-color: var(--bg-terminal);
-            border: 1px solid var(--border-terminal);
-            border-radius: 2px;
-            color: var(--accent-primary);
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-        }
         .flags-box {
             display: flex;
             gap: 1rem;
@@ -56,41 +18,14 @@
         }
         .flags-box label {
             margin-bottom: 0;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             cursor: pointer;
             font-family: var(--font-mono);
             color: var(--text-main);
             text-transform: none;
         }
-        textarea {
-            width: 100%;
-            height: 140px;
-            padding: 1rem;
-            background-color: var(--bg-terminal);
-            border: 1px solid var(--border-terminal);
-            border-radius: 2px;
-            color: var(--text-bright);
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            resize: vertical;
-        }
-        input[type="text"]:focus, textarea:focus { outline: none; border-color: var(--accent-primary); }
-        .results-section {
-            margin-top: 1.5rem;
-            background-color: var(--bg-terminal);
-            border: 1px solid var(--border-terminal);
-            border-radius: 2px;
-            padding: 1rem;
-        }
-        .results-section h3 {
-            font-size: 0.85rem;
-            color: var(--accent-primary);
-            margin-bottom: 0.75rem;
-            font-family: var(--font-mono);
-            text-transform: uppercase;
-        }
         .match-item {
-            background-color: var(--panel-bg);
+            background-color: var(--bg-terminal);
             border: 1px solid var(--border-terminal);
             padding: 0.75rem;
             border-radius: 2px;
@@ -99,41 +34,52 @@
             font-size: 0.8rem;
         }
         .match-item span { color: var(--accent-success); }
-        .no-matches { color: var(--text-main); font-style: italic; font-size: 0.85rem; }
+        .no-matches { color: var(--text-main); font-style: italic; font-size: 0.8rem; }
     </style>
 </head>
 <body>
-    <div class="tool-container">
-        <a href="index.html" class="back-link">&larr; Return to Launchpad</a>
-        <header style="border: none; margin-bottom: 1.5rem; padding-bottom: 0;">
-            <div class="header-title" style="display: flex; align-items: center; gap: 1rem;">
-                <img src="assets/img/logo.jpg" alt="Logo" style="width: 48px; height: 48px; border-radius: 2px; object-fit: cover; border: 1px solid var(--accent-primary);">
-                <div>
-                    <h1>Regex Workbench</h1>
-                    <p>Real-time regular expression testing & parsing utility</p>
-                </div>
-            </div>
-        </header>
-        <div class="form-group">
-            <label for="pattern">Regular Expression Pattern</label>
-            <div class="regex-row">
-                <input type="text" id="pattern" placeholder="\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b" oninput="runRegex()">
-                <div class="flags-box">
-                    <label><input type="checkbox" id="flag-g" checked onchange="runRegex()"> g</label>
-                    <label><input type="checkbox" id="flag-i" checked onchange="runRegex()"> i</label>
-                    <label><input type="checkbox" id="flag-m" onchange="runRegex()"> m</label>
-                </div>
+
+    <header class="app-header">
+        <div class="header-left">
+            <img src="assets/img/logo.jpg" alt="Logo" class="logo">
+            <div class="header-title">
+                <h1>Regex Workbench</h1>
+                <p>Real-time regular expression testing & parsing utility</p>
             </div>
         </div>
-        <div class="form-group">
-            <label for="test-string">Test Payload Stream</label>
-            <textarea id="test-string" placeholder="Paste test text here..." oninput="runRegex()">Contact us at support@kodaitech.io or admin@system.local</textarea>
+        <a href="index.html" class="back-link">&larr; Launchpad</a>
+    </header>
+
+    <main class="workspace">
+        <div class="panel">
+            <div class="form-group">
+                <label for="pattern">Regular Expression Pattern</label>
+                <div class="regex-row">
+                    <input type="text" id="pattern" placeholder="\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b" oninput="runRegex()">
+                    <div class="flags-box">
+                        <label><input type="checkbox" id="flag-g" checked onchange="runRegex()"> g</label>
+                        <label><input type="checkbox" id="flag-i" checked onchange="runRegex()"> i</label>
+                        <label><input type="checkbox" id="flag-m" onchange="runRegex()"> m</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 1.5rem;">
+                <label for="test-string">Test Payload Stream</label>
+                <textarea id="test-string" style="height: 120px;" placeholder="Paste test text here..." oninput="runRegex()">Contact us at support@kodaitech.io or admin@system.local</textarea>
+            </div>
         </div>
-        <div class="results-section">
-            <h3 id="match-count">Matches: 0</h3>
+
+        <div class="panel">
+            <h3 id="match-count" style="font-size: 0.8rem; color: var(--accent-primary); text-transform: uppercase; margin-bottom: 1rem;">Matches: 0</h3>
             <div id="matches-output"><span class="no-matches">Awaiting pattern compile...</span></div>
         </div>
-    </div>
+    </main>
+
+    <footer>
+        Kodai Tech // Code local. Think fast.
+    </footer>
+
     <script>
         function runRegex() {
             const patternStr = document.getElementById('pattern').value;
