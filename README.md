@@ -63,7 +63,9 @@ kodaitech/
 ├── prompt-sanitizer.html       # 4. AI Prompt Context Reducer & Log Sanitizer
 ├── env-masker.html             # 5. Local .env & Config Secret Masker
 └── json-converter.html         # 6. JSON-to-TypeScript / Schema Converter
-
+```
+---
+ 
 ## 🛠️ The 6 Core Utilities
 
 1. **Key & Secret Generator** (`key-generator.html`)
